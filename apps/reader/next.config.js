@@ -43,6 +43,11 @@ const config = {
     locales: ['en-US', 'zh-CN'],
     defaultLocale: 'en-US',
   },
+  assetPrefix: '/reader',
+
+  publicRuntimeConfig: {
+      basePath: '/reader',
+  },
   ...(IS_DOCKER && {
     output: 'standalone',
     experimental: {
