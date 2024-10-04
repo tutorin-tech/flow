@@ -26,7 +26,7 @@ export default function Document() {
 function PWA() {
   return (
     <>
-      <link rel="manifest" href="/manifest.json" />
+      <link rel="manifest" href={`${basePath}/manifest.json`} />
       <meta id="theme-color" name="theme-color" content={background.light} />
       <link rel="apple-touch-icon" href={`${basePath}/icons/192.png`} />
     </>
