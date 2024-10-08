@@ -32,21 +32,28 @@ import { copy } from '../utils'
 
 const placeholder = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect fill="gray" fill-opacity="0" width="1" height="1"/></svg>`
 
+const EBUB_SOURCE = 'epub'
+
 const SOURCE = 'src'
 
 export default function Index() {
   const { focusedTab } = useReaderSnapshot()
   const router = useRouter()
+  const epub_src = new URL(window.location.href).searchParams.get(EBUB_SOURCE)
+  const [loading, setLoading] = useState(!!epub_src)
 
-  const epub = router.query.epub
-  if (typeof epub === 'string') {
+  useEffect(() => {
+    const epub = router.query.epub
+
+    if (typeof epub === 'string') {
     fetch(epub)
     .then((res) => res.status === 200)
     .then((book_exist) => {
       if (book_exist) fetchBook(epub).then((book) => reader.addTab(book))
       else router.push('/error')
-    })
+    }).finally(() => setLoading(false))
   }
+  }, [router])
 
   useDisablePinchZooming()
 
@@ -98,8 +105,18 @@ export default function Index() {
         <title>{focusedTab?.title ?? 'Flow'}</title>
       </Head>
       <ReaderGridView />
+      {loading || <Loading />}
     </>
   )
+}
+
+function Loading() {
+  return (
+    <div className="loading-container">
+      <div className="loader"></div>
+      <p>Loading...</p>
+    </div>
+  );
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
