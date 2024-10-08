@@ -35,6 +35,9 @@ const sentryWebpackPluginOptions = {
  * @type {import('next').NextConfig}
  **/
 const config = {
+  env: {
+    NEXT_PUBLIC_BASE_READER_PATH: process.env.NEXT_PUBLIC_BASE_READER_PATH || '',
+  },
   pageExtensions: ['ts', 'tsx'],
   webpack(config) {
     return config
@@ -43,10 +46,10 @@ const config = {
     locales: ['en-US', 'zh-CN'],
     defaultLocale: 'en-US',
   },
-  assetPrefix: '/reader',
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_READER_PATH || '',
 
   publicRuntimeConfig: {
-      basePath: '/reader',
+      basePath: process.env.NEXT_PUBLIC_BASE_READER_PATH || '',
   },
   ...(IS_DOCKER && {
     output: 'standalone',
