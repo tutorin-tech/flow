@@ -1,7 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 
-const basePath = process.env.NEXT_PUBLIC_BASE_READER_PATH || '/reader'
-
 export default function Document() {
   return (
     // https://github.com/vercel/next.js/issues/10285
@@ -10,7 +8,7 @@ export default function Document() {
     <Html className="bg-default">
       <Head>
         <GoogleTagManager />
-        <link rel="icon" href={`${basePath}/icons/192.png`}></link>
+        <link rel="icon" href={`${process.env.NEXT_PUBLIC_BASE_READER_PATH}/icons/192.png`}></link>
         <PWA />
         <PreventFlash />
       </Head>
@@ -26,9 +24,9 @@ export default function Document() {
 function PWA() {
   return (
     <>
-      <link rel="manifest" href={`${basePath}/manifest.json`} />
+      <link rel="manifest" href={`${process.env.NEXT_PUBLIC_BASE_READER_PATH}/manifest.json`} />
       <meta id="theme-color" name="theme-color" content={background.light} />
-      <link rel="apple-touch-icon" href={`${basePath}/icons/192.png`} />
+      <link rel="apple-touch-icon" href={`${process.env.NEXT_PUBLIC_BASE_READER_PATH}/icons/192.png`} />
     </>
   )
 }
