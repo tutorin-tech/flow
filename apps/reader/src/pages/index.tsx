@@ -55,6 +55,10 @@ export default function Index() {
   }
   }, [router])
 
+  useEffect(() => {
+    if ('Telegram' in window) window.Telegram.WebApp.disableVerticalSwipes()
+  }, [])
+
   useDisablePinchZooming()
 
   useEffect(() => {
