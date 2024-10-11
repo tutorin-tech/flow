@@ -71,8 +71,6 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
   )
 }
 
-const basePath = process.env.NEXT_PUBLIC_BASE_READER_PATH || '/reader'
-
 const Header: React.FC = () => {
   const { asPath } = useRouter()
   const isDefaultLocale = useIsDefaultLocale()
@@ -81,7 +79,7 @@ const Header: React.FC = () => {
     <header className="typescale-body-large text-on-surface sticky top-0 border-b bg-white py-3">
       <div className="container flex items-center">
         <Link className="mr-8 flex items-center gap-3" href="/">
-          <img src={`${basePath}/icons/512.png`} alt="Logo" className="w-7" />
+          <img src={`${process.env.NEXT_PUBLIC_BASE_READER_PATH}/icons/512.png`} alt="Logo" className="w-7" />
           <span className="typescale-title-large">Flow</span>
         </Link>
         <Navbar className="hidden sm:flex" />
