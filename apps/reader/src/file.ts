@@ -88,11 +88,8 @@ async function toDataUrl(url: string) {
 
 export async function fetchBook(url: string) {
   const filename = decodeURIComponent(/\/([^/]*\.epub)$/i.exec(url)?.[1] ?? '')
-  const books = await db?.books.toArray()
-  const book = books?.find((b) => b.name === filename)
 
   return (
-    book ??
     fetch(url)
       .then((res) => res.blob())
       .then((blob) => addBook(new File([blob], filename)))
