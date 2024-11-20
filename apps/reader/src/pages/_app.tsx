@@ -10,21 +10,9 @@ import { RecoilRoot } from 'recoil'
 
 import { Layout, Theme } from '../components'
 
-const basePath = process.env.NEXT_PUBLIC_BASE_READER_PATH || '/reader'
-
 export default function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register(`${basePath}/sw.js`)
-          .then(registration => {
-            console.log('SW зарегистрирован: ', registration);
-          })
-          .catch(error => {
-            console.error('Ошибка регистрации SW: ', error);
-          })
-      })
-    }
+    if ('serviceWorker' in navigator) if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register(`${process.env.NEXT_PUBLIC_BASE_READER_PATH}/sw.js`))
   }, [])
 
   const router = useRouter()
